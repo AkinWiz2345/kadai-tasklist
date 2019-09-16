@@ -1,7 +1,10 @@
 class TasksController < ApplicationController
   before_action :set_task, only: [:show, :edit, :update, :destroy ]
   def index
-    @tasks = Task.all
+    if loged_in?
+      @user = User.find_by(id: session[:user_id])
+      @tasks = @user.tasks.order(id: :desc)
+    end
   end
 
   def show
