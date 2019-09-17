@@ -1,23 +1,13 @@
-<%if loged_in?  %>
+<p>ログイン中のユーザ:<%= current_user.name %></p>
+<h1>タスク一覧</h1>
+<ul>
+  <% @tasks.each do |task| %>
+    <li><%= link_to task.id, task %>:<%= task.status %> &gt; <%= task.content %></li>
+  <% end %>
+</ul>
+<%= link_to '新規タスクの投稿', new_task_path %>
 
-  <p>ログイン中のユーザ:<%= current_user.name %></p>
-  <h1>タスク一覧</h1>
-  <ul>
-    <% @tasks.each do |task| %>
-      <li><%= link_to task.id, task %>:<%= task.status %> &gt; <%= task.content %></li>
-    <% end %>
-  </ul>
-  <%= link_to '新規タスクの投稿', new_task_path %>
-  
-  <!-- テスト用に実装 -->
-  <%= link_to 'ログアウト', logout_path, method: :delete %>
-  
-<% else %> 
+<!-- テスト用に実装 -->
+<%= link_to 'ログアウト', logout_path, method: :delete %>
 
-  <div>
-    <%= link_to 'ログイン', login_path %>
-    <%= link_to '新規登録', signup_path %>
-  </div>
-  
-<% end %>
   
